@@ -95,11 +95,14 @@ $user = mysqli_fetch_assoc($db_connect);
                     <li class="<?= ($link == "profile.php")? 'active-page' : '' ?>">
                         <a href="../profile/profile.php"><i class="material-icons-two-tone">manage_accounts</i>Settings</a>
                     </li>
-                    <li class="<?= ($link == "link.php")? 'active-page' : '' ?>">
+                    <li class="<?= ($link == "links.php")? 'active-page' : '' ?>">
                         <a href="../links/links.php"><i class="material-icons-two-tone">link </i>links</a>
                     </li>
                     <li class="<?= ($link == "index.php")? 'active-page' : '' ?>">
                         <a href="../services/index.php"><i class="material-icons-two-tone">medical_services </i>Services</a>
+                    </li>
+                    <li class="<?= ($link == "portfolio.php")? 'active-page' : '' ?>">
+                        <a href="../portfolio/portfolio.php"><i class="material-icons-two-tone">design_services </i>Portfolios</a>
                     </li>
                     <li>
                         <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>

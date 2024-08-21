@@ -13,7 +13,18 @@ if(isset($_SESSION['auth_id'])){
     $link = mysqli_fetch_assoc($link_connect);
 
 }
-$service_query = "SELECT * FROM services";
+else{
+    $user_query = "SELECT * FROM users WHERE id='32'";
+    $db_connect = mysqli_query($db,$user_query);
+    $user = mysqli_fetch_assoc($db_connect);
+
+    //link query
+    $link_query = "SELECT * FROM links WHERE user_id='$32'";
+    $link_connect = mysqli_query($db,$link_query);
+    $link = mysqli_fetch_assoc($link_connect);
+
+}
+$service_query = "SELECT * FROM services wHERE status='active'";
 $services = mysqli_query($db,$service_query);
 
 
@@ -31,7 +42,7 @@ $services = mysqli_query($db,$service_query);
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="shortcut icon" type="image/x-icon" href="./front_end_assets/./front_end_assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="./front_end_assets/img/favicon.png">
         <!-- Place favicon.ico in the root directory -->
 
 		<!-- CSS here -->

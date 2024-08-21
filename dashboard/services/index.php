@@ -32,7 +32,7 @@ $services = mysqli_query($db,$service_read);
     </div>
 </div>
 
-
+<!-- service delete alert  -->
 <div class="row">
     <div class="col-12">
     <?php if(isset($_SESSION['service_delete'])) :  ?>
@@ -44,6 +44,30 @@ $services = mysqli_query($db,$service_read);
     </div>
     <?php endif; unset($_SESSION['service_delete']); ?>
     </div>
+
+<!-- service status update alert  -->
+    <?php if(isset($_SESSION['service_status'])) :  ?>
+    <div class="alert alert-custom" role="alert">
+        <div class="custom-alert-icon icon-success"><i class="material-icons-outlined">done</i></div>
+        <div class="alert-content">
+            <span class="alert-title"><?= $_SESSION['service_status'] ?></span>
+        </div>
+    </div>
+    <?php endif; unset($_SESSION['service_status']); ?>
+    </div>
+<!-- service update alert  -->
+    <?php if(isset($_SESSION['service_update'])) :  ?>
+    <div class="alert alert-custom" role="alert">
+        <div class="custom-alert-icon icon-success"><i class="material-icons-outlined">done</i></div>
+        <div class="alert-content">
+            <span class="alert-title"><?= $_SESSION['service_update'] ?></span>
+        </div>
+    </div>
+    <?php endif; unset($_SESSION['service_update']); ?>
+    </div>
+</div>
+
+
 </div>
 
 <div class="row">
@@ -57,8 +81,9 @@ $services = mysqli_query($db,$service_read);
             <thead>
                 <tr>
                 <th scope="col">Serial</th>
+                <th scope="col">Icon</th>
                 <th scope="col">Title</th>
-                <th scope="col">Description</th>
+                <th scope="col">status</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -77,12 +102,19 @@ $services = mysqli_query($db,$service_read);
                                 <?= $service['title'] ?>
                                 </td>
                                 <td>
-                                <?= $service['description'] ?>
+                                <a href="store.php?service_id=<?=$service['id']?>" class="<?= ($service['status'] == 'deactive') ? 'badge bg-danger text-white' : 'badge bg-success text-white'?>">
+                                <?= $service['status'] ?>
+                                </a>
                                 </td>
                                 <td>
+                                    <div class="d-flex justify-content-around">
                                     <a href="store.php?id=<?= $service['id'] ?>">
                                         <i class="fa fa-trash-o text-danger fa-2x"></i>
                                     </a>
+                                    <a href="edit.php?edit_id=<?= $service['id'] ?>">
+                                        <i class="fa fa-wrench text-success fa-2x"></i>
+                                    </a>
+                                    </div>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
