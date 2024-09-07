@@ -77,9 +77,6 @@ $user = mysqli_fetch_assoc($db_connect);
             </div>
             <div class="app-menu">
                 <ul class="accordion-menu">
-                    <li class="sidebar-title">
-                        Apps
-                    </li>
                     <li class="<?= ($link == "logout.php")? 'active-page' : '' ?>">
                         <a href="../../logout/logout.php" class="active"><i class="material-icons-two-tone">logout</i>logout</a>
                     </li>
@@ -88,9 +85,6 @@ $user = mysqli_fetch_assoc($db_connect);
                     </li>
                     <li <?= ($link == "home.php")? 'active-page' : '' ?>>
                         <a href="../home/home.php" class="active"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="mailbox.html"><i class="material-icons-two-tone">inbox</i>Mailbox<span class="badge rounded-pill badge-danger float-end">87</span></a>
                     </li>
                     <li class="<?= ($link == "profile.php")? 'active-page' : '' ?>">
                         <a href="../profile/profile.php"><i class="material-icons-two-tone">manage_accounts</i>Settings</a>
@@ -104,42 +98,17 @@ $user = mysqli_fetch_assoc($db_connect);
                     <li class="<?= ($link == "portfolio.php")? 'active-page' : '' ?>">
                         <a href="../portfolio/portfolio.php"><i class="material-icons-two-tone">design_services </i>Portfolios</a>
                     </li>
-                    <li>
-                        <a href="calendar.html"><i class="material-icons-two-tone">calendar_today</i>Calendar<span class="badge rounded-pill badge-success float-end">14</span></a>
+                    <li class="<?= ($link == "education.php")? 'active-page' : '' ?>">
+                        <a href="../education/education.php"><i class="material-icons-two-tone">school</i>Education</a>
                     </li>
-                    <li>
-                        <a href="todo.html"><i class="material-icons-two-tone">done</i>Todo</a>
+                    <li class="<?= ($link == "experience.php")? 'active-page' : '' ?>">
+                        <a href="../experiences/experience.php"><i class="material-icons-two-tone">key</i>Experience</a>
                     </li>
-                    <li>
-                        <a href=""><i class="material-icons-two-tone">star</i>Pages<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="pricing.html">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="invoice.html">Invoice</a>
-                            </li>
-                            <li>
-                                <a href="settings.html">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#">Authentication<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
-                                <ul class="sub-menu">
-                                    <li>
-                                        <a href="sign-in.html">Sign In</a>
-                                    </li>
-                                    <li>
-                                        <a href="sign-up.html">Sign Up</a>
-                                    </li>
-                                    <li>
-                                        <a href="lock-screen.html">Lock Screen</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="error.html">Error</a>
-                            </li>
-                        </ul>
+                    <li class="<?= ($link == "testimonial.php")? 'active-page' : '' ?>">
+                        <a href="../testimonials/testimonial.php"><i class="material-icons-two-tone">expand_circle_down</i>Testimonials</a>
+                    </li>
+                    <li class="<?= ($link == "brand.php")? 'active-page' : '' ?>">
+                        <a href="../brands/brand.php"><i class="material-icons-two-tone">branding_watermark</i>Brands</a>
                     </li>
                 </ul>
             </div>

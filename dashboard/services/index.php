@@ -11,7 +11,7 @@ $services = mysqli_query($db,$service_read);
 <div class="row">
     <div class="col">
         <div class="page-description">
-            <h1>Settings</h1>
+            <h1>Service page</h1>
         </div>
     </div>
 </div>

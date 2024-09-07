@@ -3,6 +3,7 @@ session_start();
 include "./config/database.php";
 if(isset($_SESSION['auth_id'])){
     $id = $_SESSION['auth_id'];
+    //user query
     $user_query = "SELECT * FROM users WHERE id='$id'";
     $db_connect = mysqli_query($db,$user_query);
     $user = mysqli_fetch_assoc($db_connect);
@@ -11,24 +12,47 @@ if(isset($_SESSION['auth_id'])){
     $link_query = "SELECT * FROM links WHERE user_id='$id'";
     $link_connect = mysqli_query($db,$link_query);
     $link = mysqli_fetch_assoc($link_connect);
+    // service query 
+    $service_query = "SELECT * FROM services wHERE status='active'";
+    $services = mysqli_query($db,$service_query);
+    //portfolio query
+    $port_query = "SELECT * FROM portfolios WHERE status='active'";
+    $portfolios = mysqli_query($db, $port_query);
 
 }
 else{
-    $user_query = "SELECT * FROM users WHERE id='32'";
+    //user query
+    $user_query = "SELECT * FROM users WHERE id='57'";
     $db_connect = mysqli_query($db,$user_query);
     $user = mysqli_fetch_assoc($db_connect);
 
     //link query
-    $link_query = "SELECT * FROM links WHERE user_id='$32'";
+    $link_query = "SELECT * FROM links WHERE user_id='$57'";
     $link_connect = mysqli_query($db,$link_query);
     $link = mysqli_fetch_assoc($link_connect);
-
+    // service query 
+    $service_query = "SELECT * FROM services wHERE status='active'";
+    $services = mysqli_query($db,$service_query);
+    //portfolio query
+    $port_query = "SELECT * FROM portfolios WHERE status='active'";
+    $portfolios = mysqli_query($db, $port_query);
 }
-$service_query = "SELECT * FROM services wHERE status='active'";
-$services = mysqli_query($db,$service_query);
 
+// education query
+$education_query = "SELECT * FROM educations ";
+$educations = mysqli_query($db,$education_query);
 
+// experiences query 
+$experience_query = "SELECT * FROM experiences";
+$experiences = mysqli_query($db,$experience_query);
 
+//testimonial
+$testimonial_query = "select * from testimonials";
+$testimonials = mysqli_query($db,$testimonial_query);
+
+// brands
+$brand_query = "select * from brands";
+$brands = mysqli_query($db,$brand_query);
 ?>
 
 
@@ -174,7 +198,7 @@ $services = mysqli_query($db,$service_query);
                                         <li><a target="_blank" href=" <?= $link['pinterest']?>"><i class="fab fa-pinterest"></i></a></li>
                                     </ul>
                                 </div>
-                                <a href="#" class="btn wow fadeInUp" data-wow-delay="1s">SEE PORTFOLIOS</a>
+                                <a href="index.php#portfolio" class="btn wow fadeInUp" data-wow-delay="1s">SEE PORTFOLIOS</a>
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6 d-none d-lg-block">
@@ -214,64 +238,20 @@ $services = mysqli_query($db,$service_query);
                                 <h3>Education:</h3>
                             </div>
                             <!-- Education Item -->
+                             <?php foreach($educations as $education):?>
                             <div class="education">
-                                <div class="year">2020</div>
+                                <div class="year"><?=$education['year'] ?></div>
                                 <div class="line"></div>
                                 <div class="location">
-                                    <span>PHD of Interaction Design &amp; Animation</span>
+                                    <span><?=$education['title'] ?></span>
                                     <div class="progressWrapper">
                                         <div class="progress">
-                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: <?=$education['ratio']?>%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Education Item -->
-                            <!-- Education Item -->
-                            <div class="education">
-                                <div class="year">2016</div>
-                                <div class="line"></div>
-                                <div class="location">
-                                    <span>Master of Database Administration</span>
-                                    <div class="progressWrapper">
-                                        <div class="progress">
-                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Education Item -->
-                            <!-- Education Item -->
-                            <div class="education">
-                                <div class="year">2010</div>
-                                <div class="line"></div>
-                                <div class="location">
-                                    <span>Bachelor of Computer Engineering</span>
-                                    <div class="progressWrapper">
-                                        <div class="progress">
-                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Education Item -->
-                            <!-- Education Item -->
-                            <div class="education">
-                                <div class="year">2005</div>
-                                <div class="line"></div>
-                                <div class="location">
-                                    <span>Diploma of Computer</span>
-                                    <div class="progressWrapper">
-                                        <div class="progress">
-                                            <div class="progress-bar wow slideInLefts" data-wow-delay="0.2s" data-wow-duration="2s" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Education Item -->
-                        </div>
+                            <?php endforeach;?>
                     </div>
                 </div>
             </section>
@@ -310,7 +290,9 @@ $services = mysqli_query($db,$service_query);
             <!-- Services-area-end -->
 
             <!-- Portfolios-area -->
-            <section id="portfolio" class="portfolio-area primary-bg pt-120 pb-90">
+
+            
+
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8">
@@ -321,78 +303,22 @@ $services = mysqli_query($db,$service_query);
                         </div>
                     </div>
                     <div class="row">
+                        <?php foreach($portfolios as $portfolio): ?>
                         <div class="col-lg-4 col-md-6 pitem">
                             <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/1.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Design</span>
-									<h4><a href="portfolio-single.html">Hamble Triangle</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/2.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Video</span>
-									<h4><a href="portfolio-single.html">Dark Beauty</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/3.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Audio</span>
-									<h4><a href="portfolio-single.html">Gilroy Limbo.</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-						<div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/4.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Design</span>
-									<h4><a href="portfolio-single.html">Ipsum which</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/5.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>Creative</span>
-									<h4><a href="portfolio-single.html">Eiusmod tempor</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pitem">
-                            <div class="speaker-box">
-								<div class="speaker-thumb">
-									<img src="./front_end_assets/img/images/6.jpg" alt="img">
-								</div>
-								<div class="speaker-overlay">
-									<span>UX/UI</span>
-									<h4><a href="portfolio-single.html">again there</a></h4>
-									<a href="portfolio-single.html" class="arrow-btn">More information <span></span></a>
-								</div>
-							</div>
-                        </div>
+                                <div class="speaker-thumb">
+                                    <img src="./public/portfolio/<?= $portfolio['image'] ?>" alt="img" style='height:600px; object-fit:cover;'>
+                                </div>
+                                <div class="speaker-overlay">
+                                    <span><?= $portfolio['subtitle'] ?></span>
+                                    <h4><a href="portfolio-single.html">
+                                        <?= $portfolio['title'] ?>
+                                    </a></h4>
+                                    <a href="./dashboard/portfolio/singleport.php?id=<?= $portfolio['id'] ?>" class="arrow-btn">More information <span></span></a>
+                                </div>
+                            </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </section>
@@ -404,50 +330,19 @@ $services = mysqli_query($db,$service_query);
                 <div class="container">
                     <div class="fact-wrap">
                         <div class="row justify-content-between">
+                            <?php foreach($experiences as $experience): ?>
                             <div class="col-xl-2 col-lg-3 col-sm-6">
                                 <div class="fact-box text-center mb-50">
                                     <div class="fact-icon">
-                                        <i class="flaticon-award"></i>
+                                        <i class="<?=$experience['icon'] ?>"></i>
                                     </div>
                                     <div class="fact-content">
-                                        <h2><span class="count">245</span></h2>
-                                        <span>Feature Item</span>
+                                        <h2><span class="count"><?=$experience['exp_no'] ?></span></h2>
+                                        <span><?=$experience['title'] ?></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-2 col-lg-3 col-sm-6">
-                                <div class="fact-box text-center mb-50">
-                                    <div class="fact-icon">
-                                        <i class="flaticon-like"></i>
-                                    </div>
-                                    <div class="fact-content">
-                                        <h2><span class="count">345</span></h2>
-                                        <span>Active Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-3 col-sm-6">
-                                <div class="fact-box text-center mb-50">
-                                    <div class="fact-icon">
-                                        <i class="flaticon-event"></i>
-                                    </div>
-                                    <div class="fact-content">
-                                        <h2><span class="count">39</span></h2>
-                                        <span>Year Experience</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-2 col-lg-3 col-sm-6">
-                                <div class="fact-box text-center mb-50">
-                                    <div class="fact-icon">
-                                        <i class="flaticon-woman"></i>
-                                    </div>
-                                    <div class="fact-content">
-                                        <h2><span class="count">3</span>k</h2>
-                                        <span>Our Clients</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
@@ -456,6 +351,7 @@ $services = mysqli_query($db,$service_query);
 
             <!-- testimonial-area -->
             <section class="testimonial-area primary-bg pt-115 pb-115">
+                
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8">
@@ -468,30 +364,20 @@ $services = mysqli_query($db,$service_query);
                     <div class="row justify-content-center">
                         <div class="col-xl-9 col-lg-10">
                             <div class="testimonial-active">
+                                <?php foreach($testimonials as $testimonial):?>
                                 <div class="single-testimonial text-center">
                                     <div class="testi-avatar">
-                                        <img src="./front_end_assets/img/images/testi_avatar.png" alt="img">
+                                        <img src="./public/testimonials/<?=$testimonial['image']?>" alt="img" style="widht:100px;height:100px;border-radius:50%;">
                                     </div>
                                     <div class="testi-content">
-                                        <h4><span>“</span> An event is a message sent by an object to signal the occur rence of an action. The action can causd user interaction such as a button click, or it can result <span>”</span></h4>
+                                        <h4><span>“</span> <?= $testimonial['message'] ?> <span>”</span></h4>
                                         <div class="testi-avatar-info">
-                                            <h5>tonoy jakson</h5>
-                                            <span>head of idea</span>
+                                            <h5><?= $testimonial['name'] ?></h5>
+                                            <span><?= $testimonial['designation'] ?></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="single-testimonial text-center">
-                                    <div class="testi-avatar">
-                                        <img src="./front_end_assets/img/images/testi_avatar.png" alt="img">
-                                    </div>
-                                    <div class="testi-content">
-                                        <h4><span>“</span> An event is a message sent by an object to signal the occur rence of an action. The action can causd user interaction such as a button click, or it can result <span>”</span></h4>
-                                        <div class="testi-avatar-info">
-                                            <h5>tonoy jakson</h5>
-                                            <span>head of idea</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endforeach;?>
                             </div>
                         </div>
                     </div>
@@ -503,36 +389,13 @@ $services = mysqli_query($db,$service_query);
             <div class="barnd-area pt-100 pb-100">
                 <div class="container">
                     <div class="row brand-active">
+                        <?php foreach($brands as $brand):?>
                         <div class="col-xl-2">
                             <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img01.png" alt="img">
+                                <img src="./public/brands/<?=$brand['image']?>" alt="img" style="height:100px;width:200px;border-radius:50%;" >
                             </div>
                         </div>
-                        <div class="col-xl-2">
-                            <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img02.png" alt="img">
-                            </div>
-                        </div>
-                        <div class="col-xl-2">
-                            <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img03.png" alt="img">
-                            </div>
-                        </div>
-                        <div class="col-xl-2">
-                            <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img04.png" alt="img">
-                            </div>
-                        </div>
-                        <div class="col-xl-2">
-                            <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img05.png" alt="img">
-                            </div>
-                        </div>
-                        <div class="col-xl-2">
-                            <div class="single-brand">
-                                <img src="./front_end_assets/img/brand/brand_img03.png" alt="img">
-                            </div>
-                        </div>
+                        <?php endforeach;?>
                     </div>
                 </div>
             </div>
@@ -549,23 +412,23 @@ $services = mysqli_query($db,$service_query);
                             </div>
                             <div class="contact-content">
                                 <p>Event definition is - somthing that happens occurre How evesnt sentence. Synonym when an unknown printer took a galley.</p>
-                                <h5>OFFICE IN <span>NEW YORK</span></h5>
+                                <h5>OFFICE IN <span>PABNA</span></h5>
                                 <div class="contact-list">
                                     <ul>
-                                        <li><i class="fas fa-map-marker"></i><span>Address :</span>Event Center park WT 22 New York</li>
-                                        <li><i class="fas fa-headphones"></i><span>Phone :</span>+9 125 645 8654</li>
-                                        <li><i class="fas fa-globe-asia"></i><span>e-mail :</span>info@exemple.com</li>
+                                        <li><i class="fas fa-map-marker"></i><span>Address :</span>Chachkia,atghoria,pabna</li>
+                                        <li><i class="fas fa-headphones"></i><span>Phone :</span>+88 01963 367311</li>
+                                        <li><i class="fas fa-globe-asia"></i><span>e-mail :</span>md3147693@gmail.com</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="contact-form">
-                                <form action="#">
-                                    <input type="text" placeholder="your name *">
-                                    <input type="email" placeholder="your email *">
-                                    <textarea name="message" id="message" placeholder="your message *"></textarea>
-                                    <button class="btn">SEND</button>
+                                <form action="./dashboard/email/action.php" method="post">
+                                    <input type="text" name="name" placeholder="your name" >
+                                    <input type="email" name="email" placeholder="your email" style="text-transform: lowercase !important;">
+                                    <textarea name="body" id="message" placeholder="your message"></textarea>
+                                    <button class="btn" name="email_sender">SEND</button>
                                 </form>
                             </div>
                         </div>

@@ -6,16 +6,16 @@ if(isset($_GET['edit_id'])){
     $id = $_GET['edit_id'];
     
 
-    $select_query = "SELECT * FROM services WHERE id='$id'";
+    $select_query = "SELECT * FROM experiences WHERE id='$id'";
     $select_connect = mysqli_query($db,$select_query);
-    $service = mysqli_fetch_assoc($select_connect);
+    $experience = mysqli_fetch_assoc($select_connect);
 }
 ?>
 <!-- page title  -->
 <div class="row">
     <div class="col">
         <div class="page-description">
-            <h1>Service Edit Page</h1>
+            <h1>Experience Edit Page</h1>
         </div>
     </div>
 </div>
@@ -23,17 +23,17 @@ if(isset($_GET['edit_id'])){
 <div class="col-6">
 <div class="card">
     <div class="card-header">
-        Service Edit
+        Experience Edit
     </div>
     <div class="card-body">
-    <form action="store.php?edit_id=<?=$service['id']?>" method="POST">
+    <form action="store.php?edit_id=<?=$experience['id']?>" method="POST">
                 <div class="example-content">
                     <label for="exampleInputEmail1" class="form-label">Title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['title'] ?>">
+                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $experience['title'] ?>">
                     <label for="exampleInputEmail1" class="form-label">Description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['description'] ?>">
+                    <input type="text" name="exp_no" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $experience['exp_no'] ?>">
                     <label for="exampleInputEmail1" class="form-label">Icons</label>
-                    <input readonly type="text" name="icon" class="form-control hudai" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $service['icon'] ?>">
+                    <input readonly type="text" name="icon" class="form-control hudai" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $experience['icon'] ?>">
                     <div class="card my-3">
                         <div class="card-body" style="overflow-y: scroll; height:300px;">
                             <div class="fa-2x">

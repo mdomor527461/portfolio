@@ -2,7 +2,7 @@
 
 include "../master/header.php";
 
-include "../../public/fonts/fonts.php";
+
 
 ?>
 
@@ -10,18 +10,13 @@ include "../../public/fonts/fonts.php";
 <div class="col-8">
         <div class="card">
             <div class="card-header">
-                Portfolio Create
+                Brand Create
             </div>
             <div class="card-body">
                 <form action="store.php" method="POST" enctype="multipart/form-data">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 <div class="example-content">
-                    <label for="exampleInputEmail1" class="form-label">Project Title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <label for="exampleInputEmail1" class="form-label">Project Sub-Title</label>
-                    <input type="text" name="subtitle" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <label for="exampleInputEmail1" class="form-label">Project Description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    
                     <picture class="d-block my-4">
                         <img id="port_img" src="../../public/default/default.jpg" style="width: 100%; height:300px; object-fit:contain;" alt="">
                     </picture>
