@@ -22,12 +22,12 @@ if(isset($_SESSION['auth_id'])){
 }
 else{
     //user query
-    $user_query = "SELECT * FROM users WHERE id='57'";
+    $user_query = "SELECT * FROM users WHERE id='59'";
     $db_connect = mysqli_query($db,$user_query);
     $user = mysqli_fetch_assoc($db_connect);
 
     //link query
-    $link_query = "SELECT * FROM links WHERE user_id='$57'";
+    $link_query = "SELECT * FROM links WHERE user_id='57'";
     $link_connect = mysqli_query($db,$link_query);
     $link = mysqli_fetch_assoc($link_connect);
     // service query 
@@ -187,7 +187,7 @@ $brands = mysqli_query($db,$brand_query);
                                 <?php if(isset($id)): ?>
                                     <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $user['name']?></h2>
                                 <?php else:?>
-                                    <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= "Omor Faruk"?></h2>
+                                    <h2 class="wow fadeInUp" data-wow-delay="0.4s">I am <?= $user['name']?></h2>
                                 <?php endif;?>
                                 <p class="wow fadeInUp" data-wow-delay="0.6s">I'm Will, professional web developer with long time experience in this field​.</p>
                                 <div class="banner-social wow fadeInUp" data-wow-delay="0.8s">
